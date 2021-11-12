@@ -5,29 +5,37 @@ import random
 
 sense = SenseHat()
 sense.set_rotation(270)
+
+# Main program verdier
 meny_selection = 0
 meny_max = 6
-meny_runned = [False, False, False, False, False, False, False]
+meny_runned = [False] * 7 
+filename = "save.csv"
+start_screen = [
+      (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
+    (0, 0, 0), (255, 255, 255), (0, 0, 0), (0, 0, 0), (255, 255, 255), (255, 255, 255), (255, 255, 255), (0, 0, 0),
+    (0, 0, 0), (255, 255, 255), (0, 0, 0), (0, 0, 0), (255, 255, 255), (0, 0, 0), (255, 255, 255), (0, 0, 0),
+    (0, 0, 0), (255, 255, 255), (0, 0, 0), (0, 0, 0), (255, 255, 255), (255, 255, 255), (255, 255, 255), (0, 0, 0),
+    (0, 0, 0), (255, 255, 255), (0, 0, 0), (0, 0, 0), (255, 255, 255), (0, 0, 0), (255, 255, 255), (0, 0, 0),
+    (0, 0, 0), (255, 255, 255), (0, 0, 0), (0, 0, 0), (255, 255, 255), (255, 255, 255), (255, 255, 255), (0, 0, 0),
+    (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
+    (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
+  ]
+
+#Verdi som blir true om man holde rinne middle knappen, brukes for å stoppe programmer
 interrupt = False
 
+#Bildene og tekst som brukes i menyen
 meny_pictures = {0: [
-    (245, 66, 35), (245, 66, 35), (245, 103, 35), (245, 125, 35), (245, 125, 35), (245, 154, 35), (245, 176, 35),
-    (245, 176, 35),
-    (245, 66, 35), (245, 103, 35), (245, 125, 35), (245, 154, 35), (245, 176, 35), (245, 176, 35), (245, 213, 35),
-    (250, 232, 31),
-    (245, 103, 35), (245, 125, 35), (245, 125, 35), (245, 154, 35), (245, 176, 35), (245, 213, 35), (250, 232, 31),
-    (255, 246, 162),
-    (245, 103, 35), (245, 125, 35), (245, 125, 35), (245, 176, 35), (245, 176, 35), (250, 232, 31), (255, 246, 162),
-    (255, 255, 255),
-    (5, 47, 189), (5, 77, 224), (35, 118, 245), (35, 199, 245), (35, 199, 245), (35, 199, 245), (35, 199, 245),
-    (35, 199, 245),
-    (5, 77, 224), (35, 118, 245), (35, 177, 245), (35, 177, 245), (35, 177, 245), (35, 177, 245), (35, 177, 245),
-    (35, 177, 245),
-    (35, 118, 245), (35, 126, 245), (35, 111, 245), (35, 126, 245), (35, 126, 245), (35, 126, 245), (35, 126, 245),
-    (35, 118, 245),
-    (0, 101, 255), (0, 101, 255), (0, 101, 255), (0, 101, 255), (0, 101, 255), (0, 101, 255), (35, 118, 245),
-    (5, 77, 224),
-],
+    (245, 66, 35), (245, 66, 35), (245, 103, 35), (245, 125, 35), (245, 125, 35), (245, 154, 35), (245, 176, 35), (245, 176, 35),
+    (245, 66, 35), (245, 103, 35), (245, 125, 35), (245, 154, 35), (245, 176, 35), (245, 176, 35), (245, 213, 35), (250, 232, 31),
+    (245, 103, 35), (245, 125, 35), (245, 125, 35), (245, 154, 35), (245, 176, 35), (245, 213, 35), (250, 232, 31), (255, 246, 162),
+    (245, 103, 35), (245, 125, 35), (245, 125, 35), (245, 176, 35), (245, 176, 35), (250, 232, 31), (255, 246, 162), (255, 255, 255),
+    (5, 47, 189), (5, 77, 224), (35, 118, 245), (35, 199, 245), (35, 199, 245), (35, 199, 245), (35, 199, 245), (35, 199, 245),
+    (5, 77, 224), (35, 118, 245), (35, 177, 245), (35, 177, 245), (35, 177, 245), (35, 177, 245), (35, 177, 245), (35, 177, 245),
+    (35, 118, 245), (35, 126, 245), (35, 111, 245), (35, 126, 245), (35, 126, 245), (35, 126, 245), (35, 126, 245), (35, 118, 245),
+    (0, 101, 255), (0, 101, 255), (0, 101, 255), (0, 101, 255), (0, 101, 255), (0, 101, 255), (35, 118, 245), (5, 77, 224),
+    ],
     1: [
         (0, 0, 0), (0, 0, 0), (255, 255, 255), (0, 0, 0), (0, 0, 0), (0, 0, 0), (255, 255, 255), (0, 0, 0),
         (0, 0, 0), (255, 255, 255), (0, 0, 0), (255, 255, 255), (0, 0, 0), (255, 255, 255), (0, 0, 0), (255, 255, 255),
@@ -90,8 +98,24 @@ meny_pictures = {0: [
         (208, 2, 27), (208, 2, 27), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (208, 2, 27), (208, 2, 27),
     ]
 }
+meny_text = ["Magnus sin text", 
+              "Karl Emil sitt program: Viser live temperatur på skjerm", 
+              "Markus sin text", 
+              "Kai sin text", 
+              "Even sin text", 
+              "Daniel sin text",
+              "Klikk for å avslutte, vil lagre verdier til fil"]
+              
+spill_text = ["Magnus sin forklaring", 
+              "Her ser man hva temperatur Sense hat leser, hold inne joy for å avslutte program", 
+              "Markus sin forklaring", 
+              "Kai sin forklaring", 
+              "Even sin forklaring", 
+              "Daniel sin forklaring",
+              "Verdier lagret, takk for denne gang!"]
 
 
+# Funksjon for å tegne rød firkant til skjermen
 def red_square():
     r = (255, 0, 0)
     for i in range(8):
@@ -101,6 +125,7 @@ def red_square():
         sense.set_pixel(i, 7, r)
 
 
+# Våre egne funksjoner
 def kalles():
     global interrupt
     r = (255, 0, 0)
@@ -388,6 +413,7 @@ def magnus():
 
 
 def markus():
+    global interrupt
     start_pressure = sense.get_pressure()
     state = 1
 
@@ -553,7 +579,7 @@ def markus():
 
     sense.set_pixels(STATE1)
 
-    while True:
+    while not interrupt:
         blowing_pressure = sense.get_pressure() - start_pressure
         if blowing_pressure > 0.2:
             inflate = True
@@ -613,14 +639,16 @@ def markus():
                 sense.set_pixels(STATE5)
 
         time.sleep(0.5)
+    interrupt = False
     return sense.get_pressure()
 
 
+# Verdier som indikerer om man har trykket en knapp
 j_right_click = False
 j_left_click = False
 j_middle_click = False
 
-
+# Funksjoner som er bindet til knappene, vil aktivere verdiene over
 def j_right(event):
     global j_right_click
     if event.action == ACTION_RELEASED:
@@ -640,54 +668,113 @@ def j_middle(event):
         j_middle_click = True
     elif event.action == ACTION_HELD:
         interrupt = True
+        
 
 
+# Funksjon for å legge til verdier i fil, values er liste med retur verdiene
+def add_to_file(values):
+  text = ""
+  for i in values:
+    text += str(i) + ";"
+  text += "\n"
+  file = open(filename, "a")
+  file.write(text)
+  file.close()
+  
+
+# Printer en tom linje til skjerm som skal brukes til tekst
+print("", end="\r", flush=True)
+# Funksjon for å oppdatere linje på skjerm
+def update_screen(text):
+  for x in range(75):
+    print("*" * (75 - x), x, end="\x1b[1K\r")
+  print(text, end="\r", flush=True)
+
+
+# Hoved funksjon
 def main():
+    # Hente verdier som skal kunne forandres i main
     global meny_selection
     global j_right_click
     global j_left_click
     global j_middle_click
+    global interrupt
+    
+    # Binder funksjoner til knapper
     sense.stick.direction_left = j_left
     sense.stick.direction_right = j_right
     sense.stick.direction_middle = j_middle
+    
+    
+    # Lager liste for lagring i fil
+    return_values = [None] * 6
+    sense.set_pixels(start_screen)
+    update_screen("Velkommen til Gr18 sitt program, bla igjennom programmer med joy, klikk for å velge program")
+    time.sleep(5)
+    
+    # Setter første bilde og tekst
     sense.set_pixels(meny_pictures[meny_selection])
+    update_screen(meny_text[meny_selection])
+    
+    
+    #Hoved loop
     while True:
+      
+        # Se om knapp har blitt trykket
         if j_right_click:
             j_right_click = False
             meny_selection += 1
             if meny_selection > meny_max:
                 meny_selection = 0
+            update_screen(meny_text[meny_selection])
         elif j_left_click:
             j_left_click = False
             meny_selection -= 1
             if meny_selection < 0:
                 meny_selection = meny_max
+            update_screen(meny_text[meny_selection])
         elif j_middle_click:
             j_middle_click = False
             meny_runned[meny_selection] = True
+            
+            # Velge hvilket program som skal kjøre
             if meny_selection == 0:
-                magnus()
+                update_screen(spill_text[meny_selection])
+                return_values[0] = magnus()
             elif meny_selection == 1:
-                temp_karl = kalles()
+                update_screen(spill_text[meny_selection])
+                return_values[1] = kalles()
             elif meny_selection == 2:
-                markus()
+                update_screen(spill_text[meny_selection])
+                return_values[2] = markus()
             elif meny_selection == 3:
-                kai()
+                update_screen(spill_text[meny_selection])
+                return_values[3] = kai()
             elif meny_selection == 4:
-                pass
+                update_screen(spill_text[meny_selection])
+                return_values[4] = even()
             elif meny_selection == 5:
-                pass
-            elif meny_selection == 6:
+                update_screen(spill_text[meny_selection])
+                return_values[5] = daniel()
+            elif meny_selection == 6: # Skjerm 6 er avslutt skjerm, lagrer til fil og stopper prosess
+                update_screen(spill_text[meny_selection])
+                add_to_file(return_values)
+                time.sleep(3)
                 sense.clear()
                 break
+        # Setter riktig bilde
         sense.set_pixels(meny_pictures[meny_selection])
+        
+        # Hvis man er på skjerm 6, er det bar nederst som viser hvilke program som er kjørt og ikke
         if meny_selection == 6:
-            for i in range(len(meny_runned) - 1):
+            for i in range(len(meny_runned)):
                 if meny_runned[i]:
                     sense.set_pixel(1 + i, 7, (0, 255, 0))
                 else:
                     sense.set_pixel(1 + i, 7, (255, 255, 255))
-        if meny_runned[meny_selection]:
+        
+        # Hvis man har kjørt et program, så vises en rød firkant på den skjermen
+        if  meny_selection != 6 and meny_runned[meny_selection]:
             red_square()
 
 
