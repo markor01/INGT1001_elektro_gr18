@@ -6,7 +6,7 @@ import random
 sense = SenseHat()
 sense.set_rotation(270)
 
-# Main program verdier
+# Main program variabler
 meny_selection = 0
 meny_max = 6
 meny_runned = [False] * 7 
