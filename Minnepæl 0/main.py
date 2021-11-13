@@ -51,11 +51,17 @@ def j_middle(event):
     elif event.action == ACTION_HELD:
         interrupt = True
 
+
+# Funksjon for å resette alle joy inputs
 def reset_interrupt():
     global interrupt
     global j_middle_click
+    global j_left_click
+    global j_right_click
     interrupt = False
     j_middle_click = False
+    j_left_click = False
+    j_right_click = False
         
 
 
@@ -219,7 +225,388 @@ def daniel():
 
 
 def even():
-    pass
+    reset_interrupt()
+    w = (255, 255, 255)
+    r = (255, 0, 0)
+    g = (0, 255, 0)
+    b = (0, 0, 255)
+    FRAME1 = [
+          w, r, r, r, r, r, r, w,
+        r, r, r, w, w, r, r, r,
+        r, r, w, w, w, w, r, r,
+        r, w, w, w, w, w, w, r,
+        w, w, w, r, r, w, w, w,
+        w, w, r, r, r, r, w, w,
+        w, r, r, r, r, r, r, w,
+        r, r, r, w, w, r, r, r,
+      ]
+    
+    FRAME2 = [
+          r, r, r, w, w, r, r, r,
+        r, r, w, w, w, w, r, r,
+        r, w, w, w, w, w, w, r,
+        w, w, w, r, r, w, w, w,
+        w, w, r, r, r, r, w, w,
+        w, r, r, r, r, r, r, w,
+        r, r, r, w, w, r, r, r,
+        r, r, w, w, w, w, r, r,
+      ]
+    
+    FRAME3 = [
+          r, r, w, w, w, w, r, r,
+        r, w, w, w, w, w, w, r,
+        w, w, w, r, r, w, w, w,
+        w, w, r, r, r, r, w, w,
+        w, r, r, r, r, r, r, w,
+        r, r, r, w, w, r, r, r,
+        r, r, w, w, w, w, r, r,
+        r, w, w, w, w, w, w, r,
+      ]
+    
+    FRAME4 = [
+          r, w, w, w, w, w, w, r,
+        w, w, w, r, r, w, w, w,
+        w, w, r, r, r, r, w, w,
+        w, r, r, r, r, r, r, w,
+        r, r, r, w, w, r, r, r,
+        r, r, w, w, w, w, r, r,
+        r, w, w, w, w, w, w, r,
+        w, w, w, r, r, w, w, w,
+      ]
+    
+    FRAME5 = [
+          w, w, w, r, r, w, w, w,
+        w, w, r, r, r, r, w, w,
+        w, r, r, r, r, r, r, w,
+        r, r, r, w, w, r, r, r,
+        r, r, w, w, w, w, r, r,
+        r, w, w, w, w, w, w, r,
+        w, w, w, r, r, w, w, w,
+        w, w, r, r, r, r, w, w,
+      ]
+    
+    FRAME6 = [
+          w, w, r, r, r, r, w, w,
+        w, r, r, r, r, r, r, w,
+        r, r, r, w, w, r, r, r,
+        r, r, w, w, w, w, r, r,
+        r, w, w, w, w, w, w, r,
+        w, w, w, r, r, w, w, w,
+        w, w, r, r, r, r, w, w,
+        w, r, r, r, r, r, r, w,
+      ]
+    
+    FRAME7 = [
+          b, b, b, w, w, b, b, b,
+        w, b, b, b, b, b, b, w,
+        w, w, b, b, b, b, w, w,
+        w, w, w, b, b, w, w, w,
+        b, w, w, w, w, w, w, b,
+        b, b, w, w, w, w, b, b,
+        b, b, b, w, w, b, b, b,
+        w, b, b, b, b, b, b, w,
+      ]
+    
+    FRAME8 = [
+          b, b, w, w, w, w, b, b,
+        b, b, b, w, w, b, b, b,
+        w, b, b, b, b, b, b, w,
+        w, w, b, b, b, b, w, w,
+        w, w, w, b, b, w, w, w,
+        b, w, w, w, w, w, w, b,
+        b, b, w, w, w, w, b, b,
+        b, b, b, w, w, b, b, b,
+      ]
+    
+    FRAME9 = [
+          b, w, w, w, w, w, w, b,
+        b, b, w, w, w, w, b, b,
+        b, b, b, w, w, b, b, b,
+        w, b, b, b, b, b, b, w,
+        w, w, b, b, b, b, w, w,
+        w, w, w, b, b, w, w, w,
+        b, w, w, w, w, w, w, b,
+        b, b, w, w, w, w, b, b,
+      ]
+    
+    FRAME10 = [
+          w, w, w, b, b, w, w, w,
+        b, w, w, w, w, w, w, b,
+        b, b, w, w, w, w, b, b,
+        b, b, b, w, w, b, b, b,
+        w, b, b, b, b, b, b, w,
+        w, w, b, b, b, b, w, w,
+        w, w, w, b, b, w, w, w,
+        b, w, w, w, w, w, w, b,
+      ]
+    
+    FRAME11 = [
+          w, w, b, b, b, b, w, w,
+        w, w, w, b, b, w, w, w,
+        b, w, w, w, w, w, w, b,
+        b, b, w, w, w, w, b, b,
+        b, b, b, w, w, b, b, b,
+        w, b, b, b, b, b, b, w,
+        w, w, b, b, b, b, w, w,
+        w, w, w, b, b, w, w, w,
+      ]
+    
+    FRAME12 = [
+          w, b, b, b, b, b, b, w,
+        w, w, b, b, b, b, w, w,
+        w, w, w, b, b, w, w, w,
+        b, w, w, w, w, w, w, b,
+        b, b, w, w, w, w, b, b,
+        b, b, b, w, w, b, b, b,
+        w, b, b, b, b, b, b, w,
+        w, w, b, b, b, b, w, w,
+      ]
+
+    FRAME13 = [
+          w, w, g, g, g, g, w, w,
+        w, g, g, g, g, g, g, w,
+        g, g, g, w, w, g, g, g,
+        g, g, w, w, w, w, g, g,
+        g, g, w, w, w, w, g, g,
+        g, g, g, w, w, g, g, g,
+        w, g, g, g, g, g, g, w,
+        w, w, g, g, g, g, w, w,
+      ]
+
+    FRAME14 = [
+          w, w, w, w, w, w, w, w,
+        w, w, g, g, g, g, w, w,
+        w, g, g, g, g, g, g, w,
+        w, g, g, w, w, g, g, w,
+        w, g, g, w, w, g, g, w,
+        w, g, g, g, g, g, g, w,
+        w, w, g, g, g, g, w, w,
+        w, w, w, w, w, w, w, w,
+      ]
+    
+    FRAME15 = [
+          g, w, w, w, w, w, w, g,
+        w, w, w, w, w, w, w, w,
+        w, w, w, g, g, w, w, w,
+        w, w, g, g, g, g, w, w,
+        w, w, g, g, g, g, w, w,
+        w, w, w, g, g, w, w, w,
+        w, w, w, w, w, w, w, w,
+        g, w, w, w, w, w, w, g,
+      ]
+    
+    FRAME16 = [
+          g, g, w, w, w, w, g, g,
+        g, w, w, w, w, w, w, g,
+        w, w, w, w, w, w, w, w,
+        w, w, w, g, g, w, w, w,
+        w, w, w, g, g, w, w, w,
+        w, w, w, w, w, w, w, w,
+        g, w, w, w, w, w, w, g,
+        g, g, w, w, w, w, g, g,
+      ]
+    
+    FRAME17 = [
+          g, g, g, g, g, g, g, g,
+        g, g, w, w, w, w, g, g,
+        g, w, w, w, w, w, w, g,
+        g, w, w, w, w, w, w, g,
+        g, w, w, w, w, w, w, g,
+        g, w, w, w, w, w, w, g,
+        g, g, w, w, w, w, g, g,
+        g, g, g, g, g, g, g, g,
+      ]
+    
+    FRAME13 = [
+          g, g, g, g, g, g, g, g,
+        g, g, g, g, g, g, g, g,
+        g, g, g, g, g, g, g, g,
+        g, g, g, g, g, g, g, g,
+        g, g, g, g, g, g, g, g,
+        g, g, g, g, g, g, g, g,
+        g, g, g, g, g, g, g, g,
+        g, g, g, g, g, g, g, g,
+      ]
+    
+    FRAME14 = [
+          w, w, g, g, g, g, w, w,
+        w, g, g, g, g, g, g, w,
+        g, g, g, g, g, g, g, g,
+        g, g, g, g, g, g, g, g,
+        g, g, g, g, g, g, g, g,
+        g, g, g, g, g, g, g, g,
+        w, g, g, g, g, g, g, w,
+        w, w, g, g, g, g, w, w,
+      ]
+    
+    FRAME15 = [
+          w, w, w, w, w, w, w, w,
+        w, w, g, g, g, g, w, w,
+        w, g, g, g, g, g, g, w,
+        w, g, g, g, g, g, g, w,
+        w, g, g, g, g, g, g, w,
+        w, g, g, g, g, g, g, w,
+        w, w, g, g, g, g, w, w,
+        w, w, w, w, w, w, w, w,
+      ]
+    
+    FRAME16 = [
+          w, w, w, w, w, w, w, w,
+        w, w, w, w, w, w, w, w,
+        w, w, w, g, g, w, w, w,
+        w, w, g, g, g, g, w, w,
+        w, w, g, g, g, g, w, w,
+        w, w, w, g, g, w, w, w,
+        w, w, w, w, w, w, w, w,
+        w, w, w, w, w, w, w, w,
+      ]
+    
+    FRAME17 = [
+          w, w, w, w, w, w, w, w,
+        w, w, w, w, w, w, w, w,
+        w, w, w, w, w, w, w, w,
+        w, w, w, g, g, w, w, w,
+        w, w, w, g, g, w, w, w,
+        w, w, w, w, w, w, w, w,
+        w, w, w, w, w, w, w, w,
+        w, w, w, w, w, w, w, w,
+      ]
+    
+    FRAME18 = [
+          w, w, w, w, w, w, w, w,
+        w, w, w, w, w, w, w, w,
+        w, w, w, w, w, w, w, w,
+        w, w, w, w, w, w, w, w,
+        w, w, w, w, w, w, w, w,
+        w, w, w, w, w, w, w, w,
+        w, w, w, w, w, w, w, w,
+        w, w, w, w, w, w, w, w,
+      ]
+    
+    FRAME19 = [
+          g, g, w, w, w, w, g, g,
+        g, w, w, w, w, w, w, g,
+        w, w, w, w, w, w, w, w,
+        w, w, w, w, w, w, w, w,
+        w, w, w, w, w, w, w, w,
+        w, w, w, w, w, w, w, w,
+        g, w, w, w, w, w, w, g,
+        g, g, w, w, w, w, g, g,
+      ]
+    
+    FRAME20 = [
+          g, g, g, g, g, g, g, g,
+        g, g, w, w, w, w, g, g,
+        g, w, w, w, w, w, w, g,
+        g, w, w, w, w, w, w, g,
+        g, w, w, w, w, w, w, g,
+        g, w, w, w, w, w, w, g,
+        g, g, w, w, w, w, g, g,
+        g, g, g, g, g, g, g, g,
+      ]
+    
+    FRAME21 = [
+          g, g, g, g, g, g, g, g,
+        g, g, g, g, g, g, g, g,
+        g, g, g, w, w, g, g, g,
+        g, g, w, w, w, w, g, g,
+        g, g, w, w, w, w, g, g,
+        g, g, g, w, w, g, g, g,
+        g, g, g, g, g, g, g, g,
+        g, g, g, g, g, g, g, g,
+      ]
+    
+    FRAME22 = [
+          g, g, g, g, g, g, g, g,
+        g, g, g, g, g, g, g, g,
+        g, g, g, g, g, g, g, g,
+        g, g, g, w, w, g, g, g,
+        g, g, g, w, w, g, g, g,
+        g, g, g, g, g, g, g, g,
+        g, g, g, g, g, g, g, g,
+        g, g, g, g, g, g, g, g,
+      ]
+    
+    orientation_rad = sense.get_orientation_radians()
+    pitch = orientation_rad["pitch"]
+    while not interrupt:
+      orientation_rad = sense.get_orientation_radians()
+      pitch = orientation_rad["pitch"]
+
+      if pitch > 0.5:
+        while not interrupt:
+          sense.set_pixels(FRAME1)
+          time.sleep(0.1)
+          sense.set_pixels(FRAME2)
+          time.sleep(0.1)
+          sense.set_pixels(FRAME3)
+          time.sleep(0.1)
+          sense.set_pixels(FRAME4)
+          time.sleep(0.1)
+          sense.set_pixels(FRAME5)
+          time.sleep(0.1)
+          sense.set_pixels(FRAME6)
+          time.sleep(0.1)
+          sense.set_rotation(270)
+          orientation_rad = sense.get_orientation_radians()
+          pitch = orientation_rad["pitch"]
+          if pitch > 0.5:
+            continue
+          else:
+            break
+      elif pitch < -0.5:
+        while not interrupt:
+          sense.set_pixels(FRAME7)
+          time.sleep(0.1)
+          sense.set_pixels(FRAME8)
+          time.sleep(0.1)
+          sense.set_pixels(FRAME9)
+          time.sleep(0.1)
+          sense.set_pixels(FRAME10)
+          time.sleep(0.1)
+          sense.set_pixels(FRAME11)
+          time.sleep(0.1)
+          sense.set_pixels(FRAME12)
+          time.sleep(0.1)
+          sense.set_rotation(270)
+          orientation_rad = sense.get_orientation_radians()
+          pitch = orientation_rad["pitch"]
+          if pitch < -0.5:
+            continue
+          else:
+            break
+      else:
+        while not interrupt:
+          sense.set_pixels(FRAME13)
+          time.sleep(0.1)
+          sense.set_pixels(FRAME14)
+          time.sleep(0.1)
+          sense.set_pixels(FRAME15)
+          time.sleep(0.1)
+          sense.set_pixels(FRAME16)
+          time.sleep(0.1)
+          sense.set_pixels(FRAME17)
+          time.sleep(0.1)
+          sense.set_pixels(FRAME18)
+          time.sleep(0.1)
+          sense.set_pixels(FRAME19)
+          time.sleep(0.1)
+          sense.set_pixels(FRAME20)
+          time.sleep(0.1)
+          sense.set_pixels(FRAME21)
+          time.sleep(0.1)
+          sense.set_pixels(FRAME22)
+          time.sleep(0.1)
+          sense.set_rotation(270)
+          orientation_rad = sense.get_orientation_radians()
+          pitch = orientation_rad["pitch"]
+          if pitch < 0.5 and pitch > -0.5:
+            continue
+          else:
+            break
+    reset_interrupt()
+    return pitch
+  
 
 
 def kai():
@@ -578,6 +965,7 @@ def magnus():
 
 
 def markus():
+    reset_interrupt()
     start_pressure = sense.get_pressure()
     state = 1
 
@@ -904,7 +1292,7 @@ def main():
         
         # Hvis man er på skjerm 6, er det bar nederst som viser hvilke program som er kjørt og ikke
         if meny_selection == 6:
-            for i in range(len(meny_runned)):
+            for i in range(len(meny_runned) - 1):
                 if meny_runned[i]:
                     sense.set_pixel(1 + i, 7, (0, 255, 0))
                 else:
