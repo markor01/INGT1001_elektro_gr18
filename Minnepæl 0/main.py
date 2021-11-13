@@ -1216,7 +1216,7 @@ def update_screen(text):
   print(text, end="\r", flush=True)
 
 
-# Hoved funksjon
+# Hoved funksjonen
 def main():
     # Hente verdier som skal kunne forandres i main
     global meny_selection
