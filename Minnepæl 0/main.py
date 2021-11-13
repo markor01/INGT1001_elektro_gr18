@@ -143,7 +143,7 @@ meny_text = ["Magnus sin text",
               "Markus sin text", 
               "Kai sin text", 
               "Even sin text", 
-              "Daniel sin text",
+              "Daniel sitt program: Få en Pokemon basert på temperatur",
               "Klikk for å avslutte, vil lagre verdier til fil"]
               
 spill_text = ["Magnus sin forklaring", 
@@ -151,7 +151,7 @@ spill_text = ["Magnus sin forklaring",
               "Markus sin forklaring", 
               "Kai sin forklaring", 
               "Even sin forklaring", 
-              "Daniel sin forklaring",
+              "Rist Rasberry PI for å åpne Pokeballen. under 30 grader gir Piplup, og over gir Pikachu",
               "Verdier lagret, takk for denne gang!"]
 
 
