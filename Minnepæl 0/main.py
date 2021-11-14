@@ -1490,6 +1490,32 @@ def update_screen(text):
         print("║" + (" "*box_width) + "║")
     print("╚" + ("═"*box_width) + "╝")
 
+# Bilde bytter
+def transition(pic1, pic2, right):
+  sleep_time = 0.05
+  if right:
+    state = []
+    for i in range(1, 9):
+      for j in range(8):
+        for k in range(i, 8):
+          state.append(pic1[(8*j)+k])
+        for k in range(i):
+          state.append(pic2[(8*j)+k])
+      sense.set_pixels(state)
+      time.sleep(sleep_time)
+      state = []
+  else:
+    state = []
+    for i in range(1, 9):
+      for j in range(8):
+        for k in range(8-i, 8):
+          state.append(pic2[(8*j)+k])
+        for k in range(8-i):
+          state.append(pic1[(8*j)+k])
+      sense.set_pixels(state)
+      time.sleep(sleep_time)
+      state = []
+
 
 
 # Hoved funksjonen
@@ -1528,12 +1554,18 @@ def main():
             meny_selection += 1
             if meny_selection > meny_max:
                 meny_selection = 0
+                transition(meny_pictures[6], meny_pictures[0], True)
+            else:
+              transition(meny_pictures[meny_selection-1], meny_pictures[meny_selection], True)
             update_screen(meny_text[meny_selection])
         elif j_left_click:
             j_left_click = False
             meny_selection -= 1
             if meny_selection < 0:
                 meny_selection = meny_max
+                transition(meny_pictures[0], meny_pictures[6], False)
+            else:
+                transition(meny_pictures[meny_selection+1], meny_pictures[meny_selection], False)
             update_screen(meny_text[meny_selection])
         elif j_middle_click:
             j_middle_click = False
