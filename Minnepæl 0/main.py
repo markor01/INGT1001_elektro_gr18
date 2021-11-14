@@ -11,6 +11,7 @@ meny_selection = 0
 meny_max = 6
 meny_runned = [False] * 7 
 filename = "save.csv"
+box_width = 100
 start_screen = [
       (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
     (0, 0, 0), (255, 255, 255), (0, 0, 0), (0, 0, 0), (255, 255, 255), (255, 255, 255), (255, 255, 255), (0, 0, 0),
@@ -476,7 +477,6 @@ def daniel():
 
         else:
           sense.set_pixels(POKEBALL)
-          print(interrupt)
 
 
     reset_interrupt()
@@ -1466,13 +1466,30 @@ def add_to_file(values):
   file.close()
   
 
-# Printer en tom linje til skjerm som skal brukes til tekst
-print("", end="\r", flush=True)
-# Funksjon for å oppdatere linje på skjerm
+# Printer toppen av boksen
+def startingLines():
+    print("╔" + ("═"*box_width) + "╗")
+    print("║" + (" "*box_width) + "║")
+    print("║" + "Velkommen til gruppe 18 sitt program".center(box_width, " ") + "║")
+    print("║" + (" "*box_width) + "║")
+    print("║" + "Bruk joy venstre eller høyre for å navigere i menyen, klikk for å velge program!".ljust(box_width) + "║")
+    print("║" + "Hold inne joy for å gå ut av kjørende program, dette vil lagre sensorverdi og gå tilbake til menyen.".ljust(box_width) + "║")
+    print("║" + (" "*box_width) + "║")
+    print("║" + (" "*box_width) + "║")
+    print("║" + (" "*box_width) + "║")
+    print("╚" + ("═"*box_width) + "╝")
+
+# Oppdaterer tekst i boksen
 def update_screen(text):
-  for x in range(75):
-    print("*" * (75 - x), x, end="\x1b[1K\r")
-  print(text, end="\r", flush=True)
+    print("\033[F" + "\033[F" + "\033[F", end="\x1b[1K\r")
+    if len(text) > box_width:
+        print("║" + text[:box_width].ljust(box_width) + "║")
+        print("║" + text[box_width:].ljust(box_width) + "║")
+    else:
+        print("║" + text.ljust(box_width) + "║")
+        print("║" + (" "*box_width) + "║")
+    print("╚" + ("═"*box_width) + "╝")
+
 
 
 # Hoved funksjonen
@@ -1493,7 +1510,8 @@ def main():
     # Lager liste for lagring i fil
     return_values = [None] * 6
     sense.set_pixels(start_screen)
-    update_screen("Velkommen til Gr18 sitt program, bla igjennom programmer med joy, klikk for å velge program")
+    startingLines()
+    update_screen("")
     time.sleep(5)
     
     # Setter første bilde og tekst
@@ -1543,7 +1561,7 @@ def main():
             elif meny_selection == 6: # Skjerm 6 er avslutt skjerm, lagrer til fil og stopper prosess
                 update_screen(spill_text[meny_selection])
                 add_to_file(return_values)
-                time.sleep(3)
+                time.sleep(1)
                 sense.clear()
                 break
         # Setter riktig bilde
