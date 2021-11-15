@@ -142,7 +142,7 @@ meny_pictures = {0: [
 meny_text = ["Magnus sin text", 
               "Karl Emil sitt program: Viser live temperatur på skjerm", 
               "Markus sin text", 
-              "Kai sin text", 
+              "Kai sitt program: Grimaser som endrer seg etter temperatur", 
               "Even sin text", 
               "Daniel sitt program: Få en Pokemon basert på temperatur",
               "Klikk for å avslutte, vil lagre verdier til fil"]
@@ -150,7 +150,7 @@ meny_text = ["Magnus sin text",
 spill_text = ["Magnus sin forklaring", 
               "Her ser man hva temperatur Sense hat leser, hold inne joy for å avslutte program", 
               "Markus sin forklaring", 
-              "Kai sin forklaring", 
+              "Få 3 forskjellige grimaser, under 15 grader fryser den og klapper tenner, mellom 15 og 25 er den komfortabel og over 25 blir det for varmt", 
               "Even sin forklaring", 
               "Rist Rasberry PI for å åpne Pokeballen. under 30 grader gir Piplup, og over gir Pikachu",
               "Verdier lagret, takk for denne gang!"]
