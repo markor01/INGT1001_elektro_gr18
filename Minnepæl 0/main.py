@@ -1232,15 +1232,16 @@ def magnus():
 
 def markus():
     reset_interrupt()
-    start_pressure = sense.get_pressure()
-    state = 1
+    start_pressure = sense.get_pressure() # Måler trykket for å lage en referansetrykkverdi
+    state = 1 # state er en variabel som brukes for å holde kontroll på hvordan ballongen ser ut på LED-matrisen, og når ballongen skal sprekke
 
+    # Bilder for de ulike tilstandene ballongen går igjennom:
     STATE1 = [
         (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
         (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
         (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
         (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
-        (0, 0, 0), (0, 0, 0), (74, 74, 74), (24, 53, 211), (24, 53, 211), (74, 74, 74), (0, 0, 0), (0, 0, 0),
+        (0, 0, 0), (0, 0, 0), (0, 0, 0), (24, 53, 211), (24, 53, 211), (0, 0, 0), (0, 0, 0), (0, 0, 0),
         (0, 0, 0), (0, 0, 0), (24, 53, 211), (24, 53, 211), (24, 53, 211), (24, 53, 211), (0, 0, 0), (0, 0, 0),
         (0, 0, 0), (0, 0, 0), (0, 0, 0), (24, 53, 211), (24, 53, 211), (0, 0, 0), (0, 0, 0), (0, 0, 0),
         (0, 0, 0), (0, 0, 0), (0, 0, 0), (24, 53, 211), (24, 53, 211), (0, 0, 0), (0, 0, 0), (0, 0, 0),
@@ -1398,12 +1399,13 @@ def markus():
     sense.set_pixels(STATE1)
 
     while not interrupt:
-        blowing_pressure = sense.get_pressure() - start_pressure
-        if blowing_pressure > 0.2:
-            inflate = True
+        blowing_pressure = sense.get_pressure() - start_pressure # Trykk fra blåsingen er differansen mellom oppdatert trykk og referansetrykk
+        if blowing_pressure > 0.2: # Her kan man styre hvor stor differansen må være, altså hvor hardt man må blåse, for at ballongen skal vokse
+            inflate = True # inflate er en variabel som sier om ballongen vokser eller krymper
         else:
             inflate = False
 
+        # Sjekker for hver tilstand om ballongen vokser eller krymper, og avgjør om ballongen skal gå til neste eller forrige tilstand:
         if state == 1:
             if inflate:
                 state = 2
@@ -1437,7 +1439,7 @@ def markus():
                 state = 4
                 sense.set_pixels(STATE4)
         elif state == 6:
-            if inflate:
+            if inflate: # Dersom ballongen vokser i tilstand 6 sprekker ballongen
                 state = 1
                 sense.set_pixels(STATE7)
                 time.sleep(0.2)
@@ -1458,7 +1460,7 @@ def markus():
 
         time.sleep(0.5)
     reset_interrupt()
-    return sense.get_pressure()
+    return sense.get_pressure() # Når funksjonen avsluttes returneres avlest trykkverdi
 
 
 
