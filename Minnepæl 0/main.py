@@ -401,26 +401,31 @@ def daniel():
       ]
 
     while not interrupt:
+      # Henter verdier fra senseHat
       temp = sense.get_temperature()
       accel = sense.get_accelerometer()
 
-      sense.set_pixels(POKEBALL)
+      sense.set_pixels(POKEBALL)          # Setter bilde til en pokeball
 
       aks = True
-      while aks == True and not interrupt:
-        x, y, z = sense.get_accelerometer_raw().values()
+      while aks == True and not interrupt:            # Så lenge aks = True, altså at Rasberry Pi blir ristet så kjører koden
+        x, y, z = sense.get_accelerometer_raw().values()    
 
+      # Tar absoluttverdiene av inputene
         x = abs(x)
         y = abs(y)
         z = abs(z)
-
+            
+            # Hvis noen av inputene øker med 2 i et gitt intervall, dvs at den rister, så kjører koden
         if x > 2 or y > 2 or z > 2 :
         
+      # Tilegner variabelen temp en verdi over eller under 30 grader i det Rasberry blir ristet
           if temp >= 30:
             temperatur = 30
           else:
             temperatur = 29
 
+            # Bildesekvens for å vise at Pokeballen er i ferd med å åpnes
           for i in range(3):
             sense.set_pixels(POKEBALL2)
             time.sleep(0.2)
@@ -442,6 +447,7 @@ def daniel():
           sense.set_pixels(POKEBALL5)
           time.sleep(2)
 
+            # Bildesekvens med animasjon av at ballen åpnes
           sense.set_pixels(OPENBALL)
           time.sleep(0.1)         
           sense.set_pixels(OPENBALL2)
@@ -461,20 +467,21 @@ def daniel():
           sense.set_pixels(OPENBALL9)
           time.sleep(0.1)
 
-
+            # Sjekker hva verdien for temp var. Hvis 30 så blir pokemonen Pikachu
           if temperatur == 30:
             sense.set_pixels(POK1)
             update_screen("Din Pokemon er Pikachu!")
             time.sleep(5)
             sense.set_pixels(POKEBALL)
 
+            # Hvis under 30 grader, så blir Pokemonen til Piplup
           elif temperatur == 29:
             sense.set_pixels(POK2)
             update_screen("Din pokemon er Piplup!")
             time.sleep(5)
             sense.set_pixels(POKEBALL)
 
-
+      # Hvis Rasberry ikke ristes settes bildet bare til utgangspunktet
         else:
           sense.set_pixels(POKEBALL)
 
