@@ -1152,34 +1152,34 @@ def magnus():
     ]
 
     sense.set_pixels(SOL_NED)
-    time.sleep(1.5)
+    time.sleep(0.5)
 
     # Loadingscreen
     for i, v in enumerate(SOL_NED):
         if i == 7:
             SOL_NED[0:8] = W, W, W, W, W, W, W, W,
-            time.sleep(float((random.randint(0, 10)) / 10))
+            time.sleep(float((random.randint(0, 15)) / 10))
         elif i == 15:
             SOL_NED[8:16] = W, W, W, W, W, W, W, W,
-            time.sleep(float((random.randint(0, 10)) / 10))
+            time.sleep(float((random.randint(0, 15)) / 10))
         elif i == 23:
             SOL_NED[16:24] = W, W, W, W, W, W, W, W,
-            time.sleep(float((random.randint(0, 10)) / 10))
+            time.sleep(float((random.randint(0, 15)) / 10))
         elif i == 31:
             SOL_NED[24:32] = W, W, W, W, W, W, W, W,
-            time.sleep(float((random.randint(0, 10)) / 10))
+            time.sleep(float((random.randint(0, 15)) / 10))
         elif i == 39:
             SOL_NED[32:40] = W, W, W, W, W, W, W, W,
-            time.sleep(float((random.randint(0, 10)) / 10))
+            time.sleep(float((random.randint(0, 15)) / 10))
         elif i == 47:
             SOL_NED[40:48] = W, W, W, W, W, W, W, W,
-            time.sleep(float((random.randint(0, 10)) / 10))
+            time.sleep(float((random.randint(0, 15)) / 10))
         elif i == 55:
             SOL_NED[48:56] = W, W, W, W, W, W, W, W,
-            time.sleep(float((random.randint(0, 10)) / 10))
+            time.sleep(float((random.randint(0, 15)) / 10))
         elif i == 63:
             SOL_NED[56:64] = W, W, W, W, W, W, W, W,
-            time.sleep(float((random.randint(0, 10)) / 10))
+            time.sleep(float((random.randint(0, 15)) / 10))
 
         sense.set_pixels(SOL_NED)
 
